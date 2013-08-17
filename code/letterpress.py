@@ -6,14 +6,7 @@ __version__ = '.'.join(map(str, __version_info__))
 __author__ = "Ling Wang, forked by Sam Collard"
 
 import sys
-
-argparse = None
-
-if sys.version_info.minor < 2:
-    import optparse
-else:
-    import argparse
-
+import argparse
 import re
 import markdown2
 import logging
@@ -437,32 +430,18 @@ tags = {}
 def main():
     # Command line arguments parsing
     cmdln_desc = 'A markdown based blog system.'
-    if argparse:
-        usage = " %(prog)s PUBLISHED_DIR"
-        version = "%(prog)s " + __version__
-        parser = argparse.ArgumentParser(prog="letterpress", description=cmdln_desc, formatter_class=argparse.RawDescriptionHelpFormatter)
-        parser.add_argument("published_dir", metavar="PUBLISHED_DIR")
-        parser.add_argument("-v", "--verbose", dest="log_level",
-                                  action="store_const", const=logging.DEBUG,
-                                  help="more verbose output")
-        parser.add_argument("--version", action="version", version=version)
-        parser.set_defaults(log_level=logging.INFO)
-        options = parser.parse_args()
-        published_dir = options.published_dir
-    else:
-        usage = " %prog PUBLISHED_DIR"
-        version = "%prog " + __version__
-        parser = optparse.OptionParser(prog="letterpress", usage=usage,
-                                                 version=version, description=cmdln_desc)
-        parser.add_option("-v", "--verbose", dest="log_level",
-                                action="store_const", const=logging.DEBUG,
-                                help="more verbose output")
-        parser.set_defaults(log_level=logging.INFO)
-        options, args = parser.parse_args()
-        if len(args) != 1:
-            parser.print_help()
-            return
-        published_dir = args[0]
+    usage = " %(prog)s PUBLISHED_DIR"
+    version = "%(prog)s " + __version__
+    parser = argparse.ArgumentParser(prog="letterpress", description=cmdln_desc, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("published_dir", metavar="PUBLISHED_DIR")
+    parser.add_argument("-v", "--verbose", dest="log_level",
+                              action="store_const", const=logging.DEBUG,
+                              help="more verbose output")
+    parser.add_argument("--version", action="version", version=version)
+    parser.set_defaults(log_level=logging.INFO)
+    options = parser.parse_args()
+    published_dir = options.published_dir
+    
     published_dir = os.path.normpath(published_dir)
     templates_dir = os.path.join(published_dir, 'templates')
     logger.setLevel(options.log_level)
