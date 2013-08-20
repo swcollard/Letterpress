@@ -22,7 +22,6 @@ import pyinotify
 #--- globals ---
 logger = logging.getLogger('Letterpress')
 
-
 _meta_data_re = re.compile(r"""(?:\s*\n)*((?:\w+:.*\n)+)(?:\s*\n)+""", re.U)
 
 
@@ -61,6 +60,7 @@ class Post(object):
         with codecs.open(file_path, 'r', 'utf-8') as f:
             text = f.read()
         meta_data, rest_text = extract_meta_data(text)
+        meta_data.update(config)
         logger.debug('Meta: %s', meta_data)
         if not meta_data.get('title'):
             logger.error('Missing title')
@@ -419,7 +419,7 @@ def grouper(n, iterable, fillvalue=None):
     args = [iter(iterable)] * n
     return itertools.zip_longest(*args, fillvalue=fillvalue)
 
-
+config = {}
 posts = {}
 timeline_archives = []
 monthly_archives = {}
@@ -458,7 +458,7 @@ def main():
     logger.addHandler(file_handler)
 
     # Letterpress config file parsing.
-    config = {'markdown_ext': '.md'}
+    config['markdown_ext'] =  '.md'
     with open(os.path.join(published_dir, 'letterpress.config')) as config_file:
         for line in config_file.readlines():
             line = line.strip()
