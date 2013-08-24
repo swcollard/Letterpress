@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="robots" content="index, follow">
-  <meta name="description" content="Sam Collard's work blog archive" />
+  <meta name="description" content="{{blog_author}} blog archive" />
+  <meta name="author" content="{{blog_author}}" />
 
   <link rel="shortcut icon" href="/favicon.png" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed" />
@@ -15,11 +16,11 @@
   <link rel="stylesheet" href="/css/animations.css" />
 
   <meta property="og:type" content="blog"/>
-  <meta property="og:title" content="Sam's full blog archive"/>
-  <meta property="og:site_name" content="Sam Collard's work blog"/>
+  <meta property="og:title" content="Full blog archive"/>
+  <meta property="og:site_name" content="{{blog_title}}"/>
   <meta property="og:image" content="/img/me.png" />
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Sam Collard's work blog">
+  <meta name="twitter:title" content="{{blog_title}}">
   <meta name="twitter:description" content="Full blog archive">
   <meta name="twitter:image" content="/img/me.png">
 </head>
@@ -28,14 +29,14 @@
     <div class="container">
       <a href="/" class="logo"><img src="/img/logo@2x.png" alt="Logo" /></a>
       <p class="about">
-        I am Sam Collard, an SDE 1 at <a href="http://www.amazon.com">Amazon</a>. I work on mobile search results and desktop browse pages.
+        {{blog_bio}}
       </p>
       <ul class="headlinks">
         <li class="twitter">
-          <a href="http://twitter.com/SWCollard"><img src="/img/twitter.png" alt="Twitter" /></a>
+          <a href="http://twitter.com/{{twitter_username}}"><img src="/img/twitter.png" alt="Twitter" /></a>
         </li>
         <li class="github">
-          <a href="http://github.com/swcollard"><img src="/img/github.png" alt="GitHub" /></a>
+          <a href="http://github.com/{{github_username}}"><img src="/img/github.png" alt="GitHub" /></a>
         </li>
       </ul>
     </div>
