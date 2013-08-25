@@ -8,7 +8,7 @@ __author__ = "Ling Wang, forked by Sam Collard"
 import sys
 import argparse
 import re
-import markdown2
+import markdown
 import logging
 import logging.handlers
 import codecs
@@ -105,7 +105,7 @@ class Post(object):
         self.permalink = os.path.join(base_url, self.path)
         with open(os.path.join(templates_dir, "post.html")) as f:
             template = f.read()
-        content = markdown2.markdown(rest_text, extras={'fenced-code-blocks': pygments_options, 'footnotes': True, 'math_delimiter': math_delimiter if is_math else None})
+        content = markdown.markdown(rest_text, extras={'fenced-code-blocks': pygments_options, 'footnotes': True, 'math_delimiter': math_delimiter if is_math else None})
         # Process user written <code lang="programming-lang"></code> blocks or spans.
         content = self._format_code_lang(content)
         self.html = format(template, title=self.title, date=self.date.strftime('%Y-%m-%d'), monthly_archive_url=os.path.dirname(self.permalink) + '/', year=self.date.strftime('%Y'), month=self.date.strftime('%B'), day=self.date.strftime('%d'), tags=', '.join('<a href="/tags/{tag}">{tag}</a>'.format(tag=tag) for tag in self.tags), permalink=self.permalink, excerpt=self.excerpt, content=content, blog_author=meta_data.get('blog_author'), blog_title=meta_data.get('blog_title'), github_username=meta_data.get('github_username'), twitter_username=meta_data.get('twitter_username'))
